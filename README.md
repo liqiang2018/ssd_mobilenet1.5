@@ -1,5 +1,5 @@
 # mobilenet
-
+本机训练
 #### 项目介绍
 第九章作业
 利用slim框架和object_detection框架，做一个物体检测的模型
@@ -46,17 +46,5 @@ python object_detection/export_inference_graph.py --input_type image_tensor --pi
 python inference.py --output_dir=data --dataset_dir=F:\data\quiz-w8-data
 会在output目录下生产output.png文件，由于只训练2step，效果很不好
 ![image](https://github.com/liqiang2018/coco/blob/master/image/image/7.png)
-######在tinymind上运行，效果应该会更好,
-详情见https://www.tinymind.com/executions/zrgb32o5
-![image](https://github.com/liqiang2018/coco/blob/master/image/image/10.png)
-####4.总结
-1. 研究背景和动机
-卷积神经网络的趋势是建立更深更复杂的网络，但是在诸如机器人、自动驾驶汽车和增强现实等许多现实世界的应用中，需要在计算资源有限的移动或嵌入式平台实时运行。因此，迫切需要一种轻量、低延迟模型来满足这些场景的需要。
-目前，构建小型神经网络通常有以下两类方法：
-压缩预训练的网络：Product quantization, Vector quantization, Distillation, Hashing, Huffman coding.
-直接训练小型网络：卷积分解, 如Flattened networks, Factorized Networks, Xception network, Squeezenet.
-已有模型大多只注重大小，却忽视了速度。而MobileNet同时关注延迟的优化，是一种轻量高效的CNN。
-2. MobileNet架构
-![image](https://github.com/liqiang2018/coco/blob/master/image/image/9.png)
-直观上来看，这种分解在效果上确实是等价的。比如，把上图的代号化为实际的数字，输入图片维度是11 × 11 × 3，标准卷积为3 × 3 × 3 ×16（假设stride为2，padding为1），那么可以得到输出为6 × 6 × 16的输出结果。现在输入图片不变，先通过一个维度是3 × 3 × 1 × 3的深度卷积（输入是3通道，这里有3个卷积核，对应着进行计算，理解成for循环），得到6 × 6 × 3的中间输出，然后再通过一个维度是1 × 1 × 3 ×16的1 ×1卷积，同样得到输出为6 × 6 × 16。以上解析还可以借助一幅经典的GIF图来理解，先放这里了。   
-3.通过这周学习对模型训练，验证，模型到处，测试及各个框架的使用有了更深的了解
+tinymind运行结果及作业遇到的问题见作业说明文档.doc
+
