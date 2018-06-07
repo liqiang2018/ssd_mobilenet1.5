@@ -46,12 +46,9 @@ python object_detection/export_inference_graph.py --input_type image_tensor --pi
 python inference.py --output_dir=data --dataset_dir=F:\data\quiz-w8-data
 会在output目录下生产output.png文件，由于只训练2step，效果很不好
 ![image](https://github.com/liqiang2018/coco/blob/master/image/image/7.png)
-准备在tinymind上运行
-但tinymind各种问题，也是无语，在tinymind上耗了好久，没什么进展
-![image](https://github.com/liqiang2018/coco/blob/master/image/image/8.png)
-等tinymind可以运行的时候，效果应该会更好,
-数据集上传似乎有问题，导致运行的时候找不到数据源
-https://www.tinymind.com/executions/g1fok4vz
+######在tinymind上运行，效果应该会更好,
+详情见https://www.tinymind.com/executions/zrgb32o5
+![image](https://github.com/liqiang2018/coco/blob/master/image/image/10.png)
 ####4.总结
 1. 研究背景和动机
 卷积神经网络的趋势是建立更深更复杂的网络，但是在诸如机器人、自动驾驶汽车和增强现实等许多现实世界的应用中，需要在计算资源有限的移动或嵌入式平台实时运行。因此，迫切需要一种轻量、低延迟模型来满足这些场景的需要。
