@@ -39,7 +39,6 @@ class BalancedPositiveNegativeSampler(minibatch_sampler.MinibatchSampler):
 
     Args:
       positive_fraction: desired fraction of positive examples (scalar in [0,1])
-        in the batch.
 
     Raises:
       ValueError: if positive_fraction < 0, or positive_fraction > 1
@@ -54,9 +53,7 @@ class BalancedPositiveNegativeSampler(minibatch_sampler.MinibatchSampler):
 
     Args:
       indicator: boolean tensor of shape [N] whose True entries can be sampled.
-      batch_size: desired batch size. If None, keeps all positive samples and
-        randomly selects negative samples so that the positive sample fraction
-        matches self._positive_fraction.
+      batch_size: desired batch size.
       labels: boolean tensor of shape [N] denoting positive(=True) and negative
           (=False) examples.
 
@@ -86,19 +83,9 @@ class BalancedPositiveNegativeSampler(minibatch_sampler.MinibatchSampler):
     negative_idx = tf.logical_and(negative_idx, indicator)
 
     # Sample positive and negative samples separately
-    if batch_size is None:
-      max_num_pos = tf.reduce_sum(tf.to_int32(positive_idx))
-    else:
-      max_num_pos = int(self._positive_fraction * batch_size)
+    max_num_pos = int(self._positive_fraction * batch_size)
     sampled_pos_idx = self.subsample_indicator(positive_idx, max_num_pos)
-    num_sampled_pos = tf.reduce_sum(tf.cast(sampled_pos_idx, tf.int32))
-    if batch_size is None:
-      negative_positive_ratio = (
-          1 - self._positive_fraction) / self._positive_fraction
-      max_num_neg = tf.to_int32(
-          negative_positive_ratio * tf.to_float(num_sampled_pos))
-    else:
-      max_num_neg = batch_size - num_sampled_pos
+    max_num_neg = batch_size - tf.reduce_sum(tf.cast(sampled_pos_idx, tf.int32))
     sampled_neg_idx = self.subsample_indicator(negative_idx, max_num_neg)
 
     sampled_idx = tf.logical_or(sampled_pos_idx, sampled_neg_idx)

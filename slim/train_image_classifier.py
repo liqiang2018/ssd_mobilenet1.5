@@ -340,10 +340,12 @@ def _get_init_fn():
   # TODO(sguada) variables.filter_variables()
   variables_to_restore = []
   for var in slim.get_model_variables():
+    excluded = False
     for exclusion in exclusions:
       if var.op.name.startswith(exclusion):
+        excluded = True
         break
-    else:
+    if not excluded:
       variables_to_restore.append(var)
 
   if tf.gfile.IsDirectory(FLAGS.checkpoint_path):
@@ -549,6 +551,7 @@ def main(_):
 
     # Merge all summaries together.
     summary_op = tf.summary.merge(list(summaries), name='summary_op')
+
 
     ###########################
     # Kicks off the training. #
