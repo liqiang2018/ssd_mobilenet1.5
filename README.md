@@ -49,5 +49,6 @@ python inference.py --output_dir=data --dataset_dir=F:\data\quiz-w8-data
 准备在tinymind上运行
 但tinymind各种问题，也是无语，在tinymind上耗了好久，没什么进展
 ![image](https://github.com/liqiang2018/coco/blob/master/image/image/8.png)
-等tinymind可以运行的时候，效果应该会更好
+等tinymind可以运行的时候，效果应该会更好,
+数据集上传似乎有问题，导致运行的时候找不到数据源
 https://www.tinymind.com/executions/g1fok4vz
